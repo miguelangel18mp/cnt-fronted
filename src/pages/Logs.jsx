@@ -16,7 +16,7 @@ const Logs = () => {
 
   const obtenerLogs = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/logs', {
+      const res = await axios.get('https://cnt-backend-1sug.onrender.com/api/logs', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLogs(res.data);

@@ -48,7 +48,7 @@ const GestionCables = () => {
 
   const fetchCables = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/cables', {
+      const res = await axios.get('https://cnt-backend-1sug.onrender.com/api/cables', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCables(res.data);
@@ -69,7 +69,7 @@ const GestionCables = () => {
 
   const guardarEdicion = async (id) => {
     try {
-      await axios.put(`http://localhost:3000/api/cables/${id}`, {
+      await axios.put(`https://cnt-backend-1sug.onrender.com/api/cables/${id}`, {
         ...formEdicion,
         editado_por: usuario.id
       }, {
@@ -88,7 +88,7 @@ const GestionCables = () => {
   const eliminarCable = async (id) => {
     if (!window.confirm('¿Deseas marcar este cable como INACTIVO?')) return;
     try {
-      await axios.delete(`http://localhost:3000/api/cables/${id}`, {
+      await axios.delete(`https://cnt-backend-1sug.onrender.com/api/cables/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         data: { eliminado_por: usuario.id },
       });

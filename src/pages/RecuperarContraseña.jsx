@@ -21,7 +21,7 @@ const RecuperarContraseña = () => {
     }
 
     try {
-      await axios.put('http://localhost:3000/api/auth/recuperar', {
+      await axios.put('https://cnt-backend-1sug.onrender.com/api/auth/recuperar', {
         email,
         nueva
       });

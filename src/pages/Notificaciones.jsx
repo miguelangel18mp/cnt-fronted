@@ -13,7 +13,7 @@ const Notificaciones = () => {
 
   const obtenerNotificaciones = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/notificaciones/${usuario.id}`, {
+      const res = await axios.get(`https://cnt-backend-1sug.onrender.com/api/notificaciones/${usuario.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotificaciones(res.data);

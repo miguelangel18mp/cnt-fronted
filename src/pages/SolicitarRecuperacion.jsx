@@ -14,7 +14,7 @@ const SolicitarRecuperacion = () => {
     setError(false);
 
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/solicitar-recuperacion', { email });
+      const res = await axios.post('https://cnt-backend-1sug.onrender.com/api/auth/solicitar-recuperacion', { email });
       setMensaje('✅ Su contraseña fue restablecida. Comuníquese con el administrador.');
     } catch (err) {
       setError(true);

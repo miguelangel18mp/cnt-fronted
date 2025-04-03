@@ -15,7 +15,7 @@ const GestionUsuarios = () => {
 
   const fetchUsuarios = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/usuarios', {
+      const res = await axios.get('https://cnt-backend-1sug.onrender.com/api/usuarios', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUsuarios(res.data);
@@ -31,7 +31,7 @@ const GestionUsuarios = () => {
 
   const guardarCambios = async () => {
     try {
-      await axios.put(`http://localhost:3000/api/usuarios/${editando}`, form, {
+      await axios.put(`https://cnt-backend-1sug.onrender.com/api/usuarios/${editando}`, form, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMensaje('✅ Usuario actualizado correctamente');
@@ -48,7 +48,7 @@ const GestionUsuarios = () => {
     if (!window.confirm('¿Estás seguro de eliminar este usuario?')) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/usuarios/${id}`, {
+      await axios.delete(`https://cnt-backend-1sug.onrender.com/api/usuarios/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMensaje('✅ Usuario eliminado correctamente');

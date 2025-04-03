@@ -113,7 +113,7 @@ const IngresarCable = () => {
 
     try {
       await axios.post(
-        'http://localhost:3000/api/cables',
+        'https://cnt-backend-1sug.onrender.com/api/cables',
         {
           ...formulario,
           ingresado_por: usuario.id,

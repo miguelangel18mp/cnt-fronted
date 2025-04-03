@@ -24,7 +24,7 @@ const Restablecer = () => {
     }
 
     try {
-      const res = await axios.post(`http://localhost:3000/api/auth/restablecer/${token}`, {
+      const res = await axios.post(`https://cnt-backend-1sug.onrender.com/api/auth/restablecer/${token}`, {
         nueva,
       });
 

@@ -22,7 +22,7 @@ const RegistrarUsuario = () => {
     setMensaje('');
 
     try {
-      await axios.post('http://localhost:3000/api/usuarios', formulario, {
+      await axios.post('https://cnt-backend-1sug.onrender.com/api/usuarios', formulario, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
