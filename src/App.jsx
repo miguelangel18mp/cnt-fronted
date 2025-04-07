@@ -5,13 +5,17 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import IngresarCable from './pages/IngresarCable';
 import GestionCables from './pages/GestionCables';
+import GestionDesmontajes from './pages/GestionDesmontajes';
 import Notificaciones from './pages/Notificaciones';
 import Logs from './pages/Logs';
 import RegistrarUsuario from './pages/RegistrarUsuario';
-import RecuperarContraseña from './pages/RecuperarContraseña'; // ← Método directo (opcional)
+import RecuperarContraseña from './pages/RecuperarContraseña';
 import GestionUsuarios from './pages/GestionUsuarios';
-import SolicitarRecuperacion from './pages/SolicitarRecuperacion'; // ✅ Nueva vista para solicitar recuperación
-import Restablecer from './pages/Restablecer'; // ✅ Vista para ingresar nueva contraseña con token
+import SolicitarRecuperacion from './pages/SolicitarRecuperacion';
+import Restablecer from './pages/Restablecer';
+import RegistrarDesmontaje from './pages/RegistrarDesmontaje';
+import InicioDesmontaje from './pages/InicioDesmontaje';
+import FinalizarDesmontaje from './pages/FinalizarDesmontaje';
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -19,7 +23,6 @@ function App() {
   return (
     <Router>
       <Routes>
-
         {/* 🌐 RUTAS PÚBLICAS */}
         <Route path="/" element={<Login />} />
         <Route path="/recuperar" element={<RecuperarContraseña />} />
@@ -27,6 +30,8 @@ function App() {
         <Route path="/restablecer" element={<Restablecer />} />
 
         {/* 🔒 RUTAS PROTEGIDAS */}
+
+        {/* Técnico */}
         <Route
           path="/dashboard"
           element={
@@ -35,7 +40,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/ingresar-cable"
           element={
@@ -44,7 +48,32 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/registrar-desmontaje"
+          element={
+            <PrivateRoute roles={['tecnico']}>
+              <RegistrarDesmontaje />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/inicio-desmontaje"
+          element={
+            <PrivateRoute roles={['tecnico']}>
+              <InicioDesmontaje />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/finalizar-desmontaje"
+          element={
+            <PrivateRoute roles={['tecnico']}>
+              <FinalizarDesmontaje />
+            </PrivateRoute>
+          }
+        />
 
+        {/* Admin y Bodeguero */}
         <Route
           path="/gestion-cables"
           element={
@@ -53,7 +82,16 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/gestion-desmontajes"
+          element={
+            <PrivateRoute roles={['administrador', 'bodeguero']}>
+              <GestionDesmontajes />
+            </PrivateRoute>
+          }
+        />
 
+        {/* Todos los roles autenticados */}
         <Route
           path="/notificaciones"
           element={
@@ -63,6 +101,7 @@ function App() {
           }
         />
 
+        {/* Solo Administrador */}
         <Route
           path="/logs"
           element={
@@ -71,7 +110,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/registrar-usuario"
           element={
@@ -80,7 +118,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/usuarios"
           element={
@@ -89,13 +126,14 @@ function App() {
             </PrivateRoute>
           }
         />
-
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+
 
 
 

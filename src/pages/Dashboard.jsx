@@ -6,6 +6,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [coords, setCoords] = useState(null);
   const [copiado, setCopiado] = useState(false);
+  const [desmontajeIniciado, setDesmontajeIniciado] = useState(false);
+  const [mensajeAlerta, setMensajeAlerta] = useState('');
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -21,6 +23,10 @@ const Dashboard = () => {
         }
       );
     }
+
+    // Verificar desmontaje en proceso
+    const desmontaje = localStorage.getItem('desmontaje_en_proceso');
+    setDesmontajeIniciado(!!desmontaje);
   }, []);
 
   const handleCopy = () => {
@@ -33,8 +39,13 @@ const Dashboard = () => {
     }
   };
 
-  const handleIrIngresarCable = () => {
-    navigate('/ingresar-cable');
+  const handleFinalizarClick = () => {
+    if (desmontajeIniciado) {
+      navigate('/finalizar-desmontaje');
+    } else {
+      setMensajeAlerta('⚠️ Primero debes registrar el inicio del desmontaje.');
+      setTimeout(() => setMensajeAlerta(''), 4000);
+    }
   };
 
   return (
@@ -42,16 +53,8 @@ const Dashboard = () => {
       <Navbar />
 
       <div style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto' }}>
-        {/* Mapa y coordenadas */}
         {coords && (
-          <div style={{
-            background: '#fff',
-            color: '#333',
-            borderRadius: '8px',
-            padding: '1.5rem',
-            marginBottom: '2rem',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-          }}>
+          <div style={cuadroUbicacion}>
             <h3>📌 Tu ubicación actual</h3>
             <div style={{ height: '300px', marginBottom: '1rem' }}>
               <iframe
@@ -66,39 +69,29 @@ const Dashboard = () => {
             </div>
             <p><strong>Latitud:</strong> {coords.lat}</p>
             <p><strong>Longitud:</strong> {coords.lng}</p>
-            <button
-              onClick={handleCopy}
-              style={{
-                padding: '0.5rem 1rem',
-                backgroundColor: '#0070c0',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}
-            >
+            <button onClick={handleCopy} style={botonSecundario}>
               📋 Copiar coordenadas
             </button>
             {copiado && <span style={{ marginLeft: '1rem', color: 'green' }}>¡Copiado!</span>}
           </div>
         )}
 
-        {/* Botón para ingresar cable */}
-        <div style={{ textAlign: 'center' }}>
-          <button
-            onClick={handleIrIngresarCable}
-            style={{
-              padding: '1rem 2rem',
-              fontSize: '1.1rem',
-              backgroundColor: '#00aaff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
-            }}
-          >
+        {mensajeAlerta && (
+          <div style={alertaEstilo}>
+            {mensajeAlerta}
+          </div>
+        )}
+
+        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <button onClick={() => navigate('/inicio-desmontaje')} style={botonDashboard}>
+            🔧 Inicio de Desmontaje
+          </button>
+
+          <button onClick={handleFinalizarClick} style={{ ...botonDashboard, backgroundColor: '#28a745' }}>
+            ✅ Finalizar Desmontaje
+          </button>
+
+          <button onClick={() => navigate('/ingresar-cable')} style={{ ...botonDashboard, backgroundColor: '#00aaff' }}>
             ➕ Ingresar Cable Desmontado
           </button>
         </div>
@@ -107,7 +100,50 @@ const Dashboard = () => {
   );
 };
 
+// 🎨 Estilos
+const cuadroUbicacion = {
+  background: '#fff',
+  color: '#333',
+  borderRadius: '8px',
+  padding: '1.5rem',
+  marginBottom: '2rem',
+  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+};
+
+const botonDashboard = {
+  padding: '1rem 2rem',
+  fontSize: '1.1rem',
+  color: 'white',
+  backgroundColor: '#ff9800',
+  border: 'none',
+  borderRadius: '8px',
+  cursor: 'pointer',
+  fontWeight: 'bold',
+  boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+  transition: 'background 0.3s',
+};
+
+const botonSecundario = {
+  padding: '0.5rem 1rem',
+  backgroundColor: '#0070c0',
+  color: 'white',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer'
+};
+
+const alertaEstilo = {
+  backgroundColor: '#fff3cd',
+  color: '#856404',
+  padding: '1rem',
+  marginBottom: '1.5rem',
+  borderRadius: '5px',
+  textAlign: 'center',
+  fontWeight: 'bold',
+};
+
 export default Dashboard;
+
 
 
 

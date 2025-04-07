@@ -35,11 +35,16 @@ const Navbar = () => {
           <>
             <Link to="/dashboard" style={linkStyle}>🏠 Dashboard</Link>
             <Link to="/ingresar-cable" style={linkStyle}>➕ Ingresar Cable</Link>
+            <Link to="/inicio-desmontaje" style={linkStyle}>🚧 Inicio Desmontaje</Link>
+            <Link to="/finalizar-desmontaje" style={linkStyle}>✅ Finalizar Desmontaje</Link>
           </>
         )}
 
         {usuario?.rol !== 'tecnico' && (
-          <Link to="/gestion-cables" style={linkStyle}>📋 Ver Cables</Link>
+          <>
+            <Link to="/gestion-cables" style={linkStyle}>📋 Ver Cables</Link>
+            <Link to="/gestion-desmontajes" style={linkStyle}>🧰 Ver Desmontajes</Link> {/* ✅ NUEVO */}
+          </>
         )}
 
         <Link to="/notificaciones" style={linkStyle}>🔔 Notificaciones</Link>
@@ -48,7 +53,7 @@ const Navbar = () => {
           <>
             <Link to="/logs" style={linkStyle}>📊 Logs</Link>
             <Link to="/registrar-usuario" style={linkStyle}>🧑‍💼 Registrar Usuario</Link>
-            <Link to="/usuarios" style={linkStyle}>👥 Usuarios</Link> {/* ✅ Nuevo enlace */}
+            <Link to="/usuarios" style={linkStyle}>👥 Usuarios</Link>
           </>
         )}
 
@@ -81,6 +86,8 @@ const linkStyle = {
 };
 
 export default Navbar;
+
+
 
 
 
