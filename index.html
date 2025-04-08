@@ -1,19 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- ✅ Escalado correcto en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ✅ Buenas prácticas SEO -->
+    <meta name="description" content="Sistema web de gestión de cables desmontados para CNT EP" />
+    <meta name="author" content="CNT EP" />
+
     <!-- ✅ Título personalizado -->
     <title>Registro de Cables CNT</title>
 
-    <!-- ✅ Logo CNT como ícono (asegúrate que exista en /public) -->
+    <!-- ✅ Ícono personalizado -->
     <link rel="icon" href="/logo-cnt.jpg" type="image/jpeg" />
+
+    <!-- ✅ Fuente web opcional (puedes personalizar) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+
+    <!-- ✅ Estilo base opcional para asegurar compatibilidad -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body, html {
+        height: 100%;
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      #root {
+        height: 100%;
+      }
+    </style>
   </head>
+
   <body>
-    <!-- Aquí se renderiza tu app de React -->
     <div id="root"></div>
 
+    <!-- Tu aplicación React se monta aquí -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

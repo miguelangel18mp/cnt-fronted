@@ -30,8 +30,10 @@ const InicioDesmontaje = () => {
         setLatitud(pos.coords.latitude.toFixed(6));
         setLongitud(pos.coords.longitude.toFixed(6));
 
+        // ✅ Corregir la hora para que sea local (Ecuador UTC-5)
         const fecha = new Date();
-        const horaFormateada = fecha.toISOString().slice(0, 19).replace('T', ' ');
+        const fechaLocal = new Date(fecha.getTime() - fecha.getTimezoneOffset() * 60000);
+        const horaFormateada = fechaLocal.toISOString().slice(0, 19).replace('T', ' ');
         setHora(horaFormateada);
       },
       () => setMensaje('❌ No se pudo obtener la ubicación')
@@ -191,6 +193,7 @@ const botonAtras = {
 };
 
 export default InicioDesmontaje;
+
 
 
 

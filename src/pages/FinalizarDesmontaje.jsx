@@ -22,14 +22,19 @@ const FinalizarDesmontaje = () => {
       (pos) => {
         const lat = pos.coords.latitude.toFixed(6);
         const lng = pos.coords.longitude.toFixed(6);
-        const hora = new Date().toISOString().slice(0, 16);
+
+        // ✅ Hora local corregida (UTC-5)
+        const now = new Date();
+        const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+        const horaLocal = localDate.toISOString().slice(0, 16); // para input datetime-local
 
         setFormulario((prev) => ({
           ...prev,
           latitud_fin: lat,
           longitud_fin: lng,
-          hora_fin: hora
+          hora_fin: horaLocal
         }));
+
         setMapaCargado(true);
       },
       (err) => {
@@ -190,4 +195,5 @@ const boton = {
 };
 
 export default FinalizarDesmontaje;
+
 
