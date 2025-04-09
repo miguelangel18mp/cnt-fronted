@@ -6,8 +6,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [coords, setCoords] = useState(null);
   const [copiado, setCopiado] = useState(false);
-  const [desmontajeIniciado, setDesmontajeIniciado] = useState(false);
-  const [mensajeAlerta, setMensajeAlerta] = useState('');
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -23,10 +21,6 @@ const Dashboard = () => {
         }
       );
     }
-
-    // Verificar desmontaje en proceso
-    const desmontaje = localStorage.getItem('desmontaje_en_proceso');
-    setDesmontajeIniciado(!!desmontaje);
   }, []);
 
   const handleCopy = () => {
@@ -39,23 +33,13 @@ const Dashboard = () => {
     }
   };
 
-  const handleFinalizarClick = () => {
-    if (desmontajeIniciado) {
-      navigate('/finalizar-desmontaje');
-    } else {
-      setMensajeAlerta('⚠️ Primero debes registrar el inicio del desmontaje.');
-      setTimeout(() => setMensajeAlerta(''), 4000);
-    }
-  };
-
   return (
-    <div style={{ minHeight: '100vh', background: '#00274d', color: 'white' }}>
+    <div style={fondo}>
       <Navbar />
-
-      <div style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto' }}>
+      <div style={contenedor}>
         {coords && (
           <div style={cuadroUbicacion}>
-            <h3>📌 Tu ubicación actual</h3>
+            <h3 style={{ marginBottom: '1rem', color: '#003865' }}>📍 Tu Ubicación Actual</h3>
             <div style={{ height: '300px', marginBottom: '1rem' }}>
               <iframe
                 title="mapa-ubicacion"
@@ -70,28 +54,22 @@ const Dashboard = () => {
             <p><strong>Latitud:</strong> {coords.lat}</p>
             <p><strong>Longitud:</strong> {coords.lng}</p>
             <button onClick={handleCopy} style={botonSecundario}>
-              📋 Copiar coordenadas
+              📋 Copiar Coordenadas
             </button>
             {copiado && <span style={{ marginLeft: '1rem', color: 'green' }}>¡Copiado!</span>}
           </div>
         )}
 
-        {mensajeAlerta && (
-          <div style={alertaEstilo}>
-            {mensajeAlerta}
-          </div>
-        )}
-
-        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={contenedorBotones}>
           <button onClick={() => navigate('/inicio-desmontaje')} style={botonDashboard}>
-            🔧 Inicio de Desmontaje
+            🔧 Inicio de Desmontaje de Cable
           </button>
 
-          <button onClick={handleFinalizarClick} style={{ ...botonDashboard, backgroundColor: '#28a745' }}>
-            ✅ Finalizar Desmontaje
+          <button onClick={() => navigate('/finalizar-desmontaje')} style={{ ...botonDashboard, backgroundColor: '#28a745' }}>
+            ✅ Finalizar Desmontaje de Cable
           </button>
 
-          <button onClick={() => navigate('/ingresar-cable')} style={{ ...botonDashboard, backgroundColor: '#00aaff' }}>
+          <button onClick={() => navigate('/ingresar-cable')} style={{ ...botonDashboard, backgroundColor: '#0077b6' }}>
             ➕ Ingresar Cable Desmontado
           </button>
         </div>
@@ -100,49 +78,63 @@ const Dashboard = () => {
   );
 };
 
-// 🎨 Estilos
+// 🎨 Estilos con fondo institucional
+const fondo = {
+  minHeight: '100vh',
+  backgroundColor: '#003865', // Azul institucional CNT
+  color: '#ffffff',
+};
+
+const contenedor = {
+  padding: '2rem',
+  maxWidth: '960px',
+  margin: '0 auto',
+};
+
 const cuadroUbicacion = {
-  background: '#fff',
-  color: '#333',
-  borderRadius: '8px',
+  background: '#ffffff',
+  color: '#222',
+  borderRadius: '10px',
   padding: '1.5rem',
-  marginBottom: '2rem',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+  marginBottom: '2.5rem',
+  boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+};
+
+const botonSecundario = {
+  padding: '0.6rem 1.2rem',
+  backgroundColor: '#0070c0',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  fontSize: '0.95rem',
+};
+
+const contenedorBotones = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '1.4rem',
 };
 
 const botonDashboard = {
   padding: '1rem 2rem',
-  fontSize: '1.1rem',
-  color: 'white',
+  fontSize: '1.05rem',
+  color: '#fff',
   backgroundColor: '#ff9800',
   border: 'none',
   borderRadius: '8px',
   cursor: 'pointer',
   fontWeight: 'bold',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+  width: '100%',
+  maxWidth: '400px',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
   transition: 'background 0.3s',
 };
 
-const botonSecundario = {
-  padding: '0.5rem 1rem',
-  backgroundColor: '#0070c0',
-  color: 'white',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer'
-};
-
-const alertaEstilo = {
-  backgroundColor: '#fff3cd',
-  color: '#856404',
-  padding: '1rem',
-  marginBottom: '1.5rem',
-  borderRadius: '5px',
-  textAlign: 'center',
-  fontWeight: 'bold',
-};
-
 export default Dashboard;
+
+
 
 
 

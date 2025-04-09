@@ -7,15 +7,27 @@ import { DownloadTableExcel } from 'react-export-table-to-excel';
 
 const formatFechaHora = (fecha) => {
   if (!fecha) return '-';
-  const date = new Date(fecha);
-  return date.toLocaleString('es-EC', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  try {
+    const dateObj = new Date(fecha);
+    if (isNaN(dateObj.getTime())) return '-';
+
+    
+    const ajustada = new Date(dateObj.getTime() + (5 * 60 * 60 * 1000));
+
+    return ajustada.toLocaleString('es-EC', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  } catch (error) {
+    console.error('❌ Error al formatear fecha:', error);
+    return '-';
+  }
 };
+
 
 const GestionDesmontajes = () => {
   const [desmontajes, setDesmontajes] = useState([]);
@@ -105,7 +117,6 @@ const GestionDesmontajes = () => {
   return (
     <>
       <Navbar />
-
       <div style={{ padding: '2rem', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
         <h2 style={{ textAlign: 'center', color: '#00274d' }}>🛠 Gestión de Desmontajes</h2>
 
@@ -208,7 +219,6 @@ const GestionDesmontajes = () => {
           </table>
         </div>
 
-        {/* Modal de imagen */}
         {modalVisible && (
           <div style={modalEstilo} onClick={() => setModalVisible(false)}>
             <div style={modalContenido} onClick={(e) => e.stopPropagation()}>
@@ -222,7 +232,7 @@ const GestionDesmontajes = () => {
   );
 };
 
-// 🧾 Estilos
+// 🎨 Estilos
 const botonAccion = {
   backgroundColor: '#0070c0',
   color: 'white',
@@ -273,6 +283,8 @@ const botonDescargar = {
 };
 
 export default GestionDesmontajes;
+
+
 
 
 

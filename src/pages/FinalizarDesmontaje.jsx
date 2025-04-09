@@ -13,7 +13,6 @@ const FinalizarDesmontaje = () => {
 
   const [mensaje, setMensaje] = useState('');
   const [mapaCargado, setMapaCargado] = useState(false);
-  const [registrado, setRegistrado] = useState(false);
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
@@ -23,10 +22,9 @@ const FinalizarDesmontaje = () => {
         const lat = pos.coords.latitude.toFixed(6);
         const lng = pos.coords.longitude.toFixed(6);
 
-        // ✅ Hora local corregida (UTC-5)
         const now = new Date();
         const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-        const horaLocal = localDate.toISOString().slice(0, 16); // para input datetime-local
+        const horaLocal = localDate.toISOString().slice(0, 16);
 
         setFormulario((prev) => ({
           ...prev,
@@ -46,7 +44,6 @@ const FinalizarDesmontaje = () => {
 
   const handleChange = (e) => {
     const { name, files } = e.target;
-
     if (files && files[0]) {
       const lector = new FileReader();
       lector.onloadend = () => {
@@ -77,7 +74,6 @@ const FinalizarDesmontaje = () => {
         }
       );
       setMensaje(res.data.mensaje || '✅ Desmontaje finalizado correctamente');
-      setRegistrado(true);
     } catch (err) {
       console.error(err);
       setMensaje('❌ Error al finalizar el desmontaje');
@@ -90,12 +86,12 @@ const FinalizarDesmontaje = () => {
     <div style={fondo}>
       <Navbar />
       <div style={formularioCard}>
-        <h2 style={{ color: '#00274d', marginBottom: '1rem' }}>📍 Finalizar Desmontaje</h2>
+        <h2 style={{ color: '#00274d', marginBottom: '1rem' }}>✅ Finalizar Desmontaje de Cable</h2>
 
         {mapaCargado ? (
           <>
-            <p><strong>Latitud:</strong> {formulario.latitud_fin}</p>
-            <p><strong>Longitud:</strong> {formulario.longitud_fin}</p>
+            <p><strong>📍 Latitud:</strong> {formulario.latitud_fin}</p>
+            <p><strong>📍 Longitud:</strong> {formulario.longitud_fin}</p>
             <iframe
               title="mapa"
               width="100%"
@@ -106,7 +102,7 @@ const FinalizarDesmontaje = () => {
             />
           </>
         ) : (
-          <p>📍 Obteniendo ubicación...</p>
+          <p>📡 Obteniendo ubicación...</p>
         )}
 
         <form onSubmit={handleSubmit}>
@@ -126,8 +122,10 @@ const FinalizarDesmontaje = () => {
             style={input}
           />
 
-          <button type="submit" style={boton}>Finalizar desmontaje</button>
+          <button type="submit" style={botonPrincipal}>✅ Finalizar desmontaje</button>
         </form>
+
+        <button onClick={volver} style={botonSecundario}>⬅️ Atrás</button>
 
         {mensaje && (
           <div style={{
@@ -139,12 +137,6 @@ const FinalizarDesmontaje = () => {
           }}>
             {mensaje}
           </div>
-        )}
-
-        {registrado && (
-          <button onClick={volver} style={{ ...boton, marginTop: '1rem', backgroundColor: '#28a745' }}>
-            ⬅️ Volver al Dashboard
-          </button>
         )}
       </div>
     </div>
@@ -165,7 +157,7 @@ const fondo = {
 };
 
 const formularioCard = {
-  maxWidth: '500px',
+  maxWidth: '520px',
   width: '100%',
   backgroundColor: 'rgba(255,255,255,0.95)',
   padding: '2rem',
@@ -182,7 +174,7 @@ const input = {
   fontSize: '1rem',
 };
 
-const boton = {
+const botonPrincipal = {
   width: '100%',
   padding: '0.8rem',
   backgroundColor: '#0070c0',
@@ -191,9 +183,23 @@ const boton = {
   border: 'none',
   borderRadius: '6px',
   fontSize: '1rem',
+  cursor: 'pointer',
+  marginBottom: '0.8rem'
+};
+
+const botonSecundario = {
+  width: '100%',
+  padding: '0.7rem',
+  backgroundColor: '#ccc',
+  color: '#333',
+  fontWeight: 'bold',
+  border: 'none',
+  borderRadius: '6px',
+  fontSize: '1rem',
   cursor: 'pointer'
 };
 
 export default FinalizarDesmontaje;
+
 
 
