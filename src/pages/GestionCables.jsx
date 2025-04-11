@@ -187,7 +187,7 @@ const GestionCables = () => {
           </>
         )}
 
-        {/* ... la tabla y la lógica de edición quedan igual, solo cambia cables por cablesFiltrados */}
+        {/* ... la tabla */}
 
         <div style={{ overflowX: 'auto' }}>
           <table style={{
@@ -211,32 +211,86 @@ const GestionCables = () => {
               </tr>
             </thead>
             <tbody>
-              {cablesFiltrados.map(c => (
-                <tr key={c.id}>
-                  <td>{c.tipo}</td>
-                  <td>{c.capacidad}</td>
-                  <td>{c.metraje} m</td>
-                  <td>{c.latitud}</td>
-                  <td>{c.longitud}</td>
-                  <td>{c.estado}</td>
-                  <td>{c.nombre_usuario}</td>
-                  <td>
-                    <a
-                      href={`https://www.google.com/maps?q=${c.latitud},${c.longitud}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: '#0070c0', fontWeight: 'bold' }}
-                    >📍 Ver</a>
-                  </td>
-                  {usuario.rol !== 'tecnico' && (
-                    <td>
-                      <button onClick={() => iniciarEdicion(c)} style={botonEditar}>✏️</button>
-                      <button onClick={() => eliminarCable(c.id)} style={botonEliminar}>🗑</button>
-                    </td>
-                  )}
-                </tr>
-              ))}
-            </tbody>
+  {cablesFiltrados.map((c) => (
+    <tr key={c.id}>
+      <td>
+        {editando === c.id ? (
+          <select name="tipo" value={formEdicion.tipo} onChange={handleTipoChange} style={inputStyle}>
+            <option value="">Selecciona tipo</option>
+            {tiposCable.map((tipo, i) => (
+              <option key={i} value={tipo}>{tipo}</option>
+            ))}
+          </select>
+        ) : (
+          c.tipo
+        )}
+      </td>
+      <td>
+        {editando === c.id ? (
+          <input type="text" name="capacidad" value={formEdicion.capacidad} readOnly style={inputStyle} />
+        ) : (
+          c.capacidad
+        )}
+      </td>
+      <td>
+        {editando === c.id ? (
+          <input type="number" name="metraje" value={formEdicion.metraje} onChange={(e) => setFormEdicion({ ...formEdicion, metraje: e.target.value })} style={inputStyle} />
+        ) : (
+          `${c.metraje} m`
+        )}
+      </td>
+      <td>{c.latitud}</td>
+      <td>{c.longitud}</td>
+      <td>{c.estado}</td>
+      <td>{c.nombre_usuario}</td>
+      <td>
+        <a
+          href={`https://www.google.com/maps?q=${c.latitud},${c.longitud}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: '#0070c0', fontWeight: 'bold' }}
+        >
+          📍 Ver
+        </a>
+      </td>
+      <td>
+        {editando === c.id ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <button
+              onClick={() => guardarEdicion(c.id)}
+              style={{
+                ...botonGuardar,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+              }}
+            >
+              💾 Guardar
+            </button>
+            <button
+              onClick={cancelarEdicion}
+              style={{
+                ...botonCancelar,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+              }}
+            >
+              ❌ Cancelar
+            </button>
+          </div>
+        ) : (
+          <>
+            <button onClick={() => iniciarEdicion(c)} style={botonEditar}>✏️</button>
+            <button onClick={() => eliminarCable(c.id)} style={botonEliminar}>🗑</button>
+          </>
+        )}
+      </td>
+    </tr>
+  ))}
+</tbody>
+
+
           </table>
         </div>
       </div>
