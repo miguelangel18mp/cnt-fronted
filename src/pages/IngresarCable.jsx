@@ -35,7 +35,6 @@ const IngresarCable = () => {
   });
 
   const [mensaje, setMensaje] = useState('');
-  const [opcionesCapacidad, setOpcionesCapacidad] = useState([]);
   const [coords, setCoords] = useState(null);
   const token = localStorage.getItem('token');
   const usuario = JSON.parse(localStorage.getItem('usuario'));
@@ -53,18 +52,22 @@ const IngresarCable = () => {
     );
   }, []);
 
+  // ✅ Auto-asignar capacidad desde el tipo
   useEffect(() => {
-    const tipo = formulario.tipo.toLowerCase();
-    if (tipo.includes('fo') || tipo.includes('adss')) {
-      setOpcionesCapacidad(['12 HILOS', '24 HILOS', '48 HILOS']);
-    } else if (tipo.includes('pares')) {
-      setOpcionesCapacidad([
-        '10 PARES', '20 PARES', '30 PARES', '50 PARES', '70 PARES', '90 PARES',
-        '100 PARES', '150 PARES', '200 PARES', '300 PARES', '400 PARES', '600 PARES',
-        '1200 PARES', '1500 PARES', '1800 PARES'
-      ]);
-    } else {
-      setOpcionesCapacidad([]);
+    const tipo = formulario.tipo.toUpperCase();
+    let capacidadDetectada = '';
+
+    const hilosMatch = tipo.match(/(\d+)\s*H/i);
+    const paresMatch = tipo.match(/(\d+)\s*PARES/i);
+
+    if (hilosMatch) {
+      capacidadDetectada = `${hilosMatch[1]} HILOS`;
+    } else if (paresMatch) {
+      capacidadDetectada = `${paresMatch[1]} PARES`;
+    }
+
+    if (capacidadDetectada) {
+      setFormulario((prev) => ({ ...prev, capacidad: capacidadDetectada }));
     }
   }, [formulario.tipo]);
 
@@ -110,10 +113,14 @@ const IngresarCable = () => {
             {tiposCable.map((op, i) => <option key={i} value={op}>{op}</option>)}
           </select>
 
-          <select name="capacidad" value={formulario.capacidad} onChange={handleChange} required style={input}>
-            <option value="">-- Capacidad --</option>
-            {opcionesCapacidad.map((cap, i) => <option key={i} value={cap}>{cap}</option>)}
-          </select>
+          <input
+            type="text"
+            name="capacidad"
+            value={formulario.capacidad}
+            placeholder="Capacidad"
+            readOnly
+            style={{ ...input, backgroundColor: '#e9ecef' }}
+          />
 
           <input type="number" name="metraje" placeholder="Metraje" value={formulario.metraje} onChange={handleChange} required style={input} />
           <input type="text" name="latitud" placeholder="Latitud" value={formulario.latitud} onChange={handleChange} required style={input} />
@@ -200,7 +207,6 @@ const boton = {
 };
 
 export default IngresarCable;
-
 
 
 
