@@ -17,7 +17,6 @@ const Navbar = () => {
     setMenuAbierto(!menuAbierto);
   };
 
-  // Cierra el menú si haces clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -75,7 +74,7 @@ const Navbar = () => {
         ☰
       </div>
 
-      {/* Menú hamburguesa para ítems adicionales */}
+      {/* Menú desplegable adicional */}
       {menuAbierto && (
         <div ref={menuRef} style={estilos.menuDesplegable}>
           {(usuario?.rol === 'administrador' || usuario?.rol === 'tecnico' || usuario?.rol === 'bodeguero') && (
@@ -95,7 +94,7 @@ const Navbar = () => {
 
 const estilos = {
   navbar: {
-    backgroundColor: '#00274d',
+    backgroundColor: '#0095DB', // Azul CNT
     padding: '1rem 1.5rem',
     color: '#fff',
     display: 'flex',
@@ -119,11 +118,11 @@ const estilos = {
     flex: '1 1 auto',
   },
   link: {
-    color: '#ffffff',
+    color: '#FFFFFF',
     textDecoration: 'none',
     fontWeight: '500',
     transition: 'color 0.2s',
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
   },
   hamburguesa: {
     fontSize: '1.6rem',
@@ -132,13 +131,13 @@ const estilos = {
     padding: '0.3rem 0.8rem',
     background: 'none',
     border: 'none',
-    color: '#fff'
+    color: '#fff',
   },
   menuDesplegable: {
     position: 'absolute',
     top: '100%',
     right: '1rem',
-    backgroundColor: '#00274d',
+    backgroundColor: '#046693', // Pantone 307
     padding: '1rem',
     borderRadius: '8px',
     boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
@@ -146,23 +145,24 @@ const estilos = {
     display: 'flex',
     flexDirection: 'column',
     gap: '0.8rem',
-    minWidth: '180px',
+    minWidth: '190px',
   },
   menuLink: {
     color: '#ffffff',
     textDecoration: 'none',
     fontWeight: '500',
-    fontSize: '0.95rem'
+    fontSize: '0.95rem',
   },
   logout: {
-    backgroundColor: 'transparent',
-    border: '1px solid #fff',
-    color: '#fff',
+    backgroundColor: '#ffffff',
+    border: 'none',
+    color: '#046693',
     padding: '0.5rem',
-    borderRadius: '5px',
+    borderRadius: '6px',
+    fontWeight: 'bold',
     cursor: 'pointer',
-    fontWeight: 'bold'
-  }
+    fontSize: '0.95rem',
+  },
 };
 
 export default Navbar;

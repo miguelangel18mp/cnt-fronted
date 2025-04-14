@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar'; // ✅ IMPORTADO
 
 const tiposCable = [
   "CABLE AEREO FO 12H G.652D FIG.8", "CABLE AEREO FO 24H G.652D FIG.8", "CABLE AEREO FO 48H G.652D FIG.8",
@@ -30,7 +31,6 @@ const InicioDesmontaje = () => {
         setLatitud(pos.coords.latitude.toFixed(6));
         setLongitud(pos.coords.longitude.toFixed(6));
 
-        // ✅ Corregir la hora para que sea local (Ecuador UTC-5)
         const fecha = new Date();
         const fechaLocal = new Date(fecha.getTime() - fecha.getTimezoneOffset() * 60000);
         const horaFormateada = fechaLocal.toISOString().slice(0, 19).replace('T', ' ');
@@ -89,8 +89,10 @@ const InicioDesmontaje = () => {
 
   return (
     <div style={fondo}>
+      <Navbar /> {/* ✅ INCLUIDO EL NAVBAR */}
+
       <div style={card}>
-        <h2 style={{ color: '#00274d', marginBottom: '1rem' }}>🚧 Inicio de Desmontaje</h2>
+        <h2 style={{ color: '#003865', marginBottom: '1rem' }}>🚧 Inicio de Desmontaje</h2>
 
         <form onSubmit={handleSubmit}>
           <select value={tipo} onChange={handleTipo} required style={input}>
@@ -118,10 +120,10 @@ const InicioDesmontaje = () => {
             />
           )}
 
-          <button type="submit" style={boton}>Registrar inicio</button>
+          <button type="submit" style={botonPrimario}>Registrar inicio</button>
         </form>
 
-        <button onClick={() => navigate('/dashboard')} style={botonAtras}>⬅️ Atrás</button>
+        <button onClick={() => navigate('/dashboard')} style={botonSecundario}>⬅️ Atrás</button>
 
         {mensaje && (
           <div style={{
@@ -141,22 +143,21 @@ const InicioDesmontaje = () => {
 
 const fondo = {
   minHeight: '100vh',
-  backgroundImage: 'url("/fondo-cnt.jpg")',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
+  backgroundColor: '#f4f6f9', // Fondo institucional claro
   display: 'flex',
-  justifyContent: 'center',
+  flexDirection: 'column',
   alignItems: 'center',
   padding: '2rem'
 };
 
 const card = {
   width: '100%',
-  maxWidth: '500px',
-  backgroundColor: 'rgba(255,255,255,0.95)',
+  maxWidth: '520px',
+  backgroundColor: '#f2f2f2',
   padding: '2rem',
   borderRadius: '10px',
-  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+  marginTop: '1rem'
 };
 
 const input = {
@@ -168,10 +169,10 @@ const input = {
   fontSize: '1rem'
 };
 
-const boton = {
+const botonPrimario = {
   width: '100%',
   padding: '0.9rem',
-  backgroundColor: '#0070c0',
+  backgroundColor: '#0095DB', // Azul CNT
   color: '#fff',
   border: 'none',
   borderRadius: '6px',
@@ -181,10 +182,10 @@ const boton = {
   marginBottom: '1rem'
 };
 
-const botonAtras = {
+const botonSecundario = {
   width: '100%',
   padding: '0.8rem',
-  backgroundColor: '#6c757d',
+  backgroundColor: '#046693',
   color: '#fff',
   border: 'none',
   borderRadius: '6px',
@@ -193,6 +194,8 @@ const botonAtras = {
 };
 
 export default InicioDesmontaje;
+
+
 
 
 

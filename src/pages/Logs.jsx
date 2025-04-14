@@ -129,8 +129,8 @@ const tablaEstilo = {
 };
 
 const botonExportar = {
-  backgroundColor: '#0070c0',
-  color: 'white',
+  backgroundColor: '#0095DB',
+  color: '#fff',
   border: 'none',
   padding: '0.5rem 1rem',
   borderRadius: '5px',

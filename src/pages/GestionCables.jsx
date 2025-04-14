@@ -298,18 +298,33 @@ const GestionCables = () => {
   );
 };
 
-// Estilos
+// 🎨 Estilos institucionales
+const fondo = {
+  padding: '2rem',
+  backgroundColor: '#f4f6f9',
+  minHeight: '100vh',
+};
+
+const card = {
+  backgroundColor: '#ffffff',
+  padding: '2rem',
+  borderRadius: '10px',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+};
+
 const inputStyle = {
   width: '100%',
   padding: '0.6rem',
   border: '1px solid #ccc',
   borderRadius: '5px',
-  marginBottom: '0.9rem',
+  marginBottom: '0.5rem',
 };
 
 const botonAccion = {
-  backgroundColor: '#0070c0',
-  color: 'white',
+  backgroundColor: '#0095DB',
+  color: '#fff',
   padding: '0.5rem 1rem',
   border: 'none',
   borderRadius: '5px',
@@ -317,8 +332,8 @@ const botonAccion = {
 };
 
 const botonEditar = {
-  backgroundColor: '#ffc107',
-  color: '#000',
+  backgroundColor: '#0095DB',
+  color: '#fff',
   padding: '0.4rem',
   border: 'none',
   borderRadius: '5px',
@@ -327,7 +342,7 @@ const botonEditar = {
 };
 
 const botonEliminar = {
-  backgroundColor: '#dc3545',
+  backgroundColor: '#0095DB',
   color: '#fff',
   padding: '0.4rem',
   border: 'none',
@@ -336,22 +351,23 @@ const botonEliminar = {
 };
 
 const botonGuardar = {
-  backgroundColor: '#28a745',
+  backgroundColor: '#0095DB',
   color: '#fff',
-  padding: '0.5rem 1rem',
+  padding: '0.5rem',
   border: 'none',
   borderRadius: '5px',
   cursor: 'pointer',
 };
 
 const botonCancelar = {
-  backgroundColor: '#6c757d',
+  backgroundColor: '#046693',
   color: '#fff',
-  padding: '0.5rem 1rem',
+  padding: '0.5rem',
   border: 'none',
   borderRadius: '5px',
   cursor: 'pointer',
 };
+
 
 export default GestionCables;
 

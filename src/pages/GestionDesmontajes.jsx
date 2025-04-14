@@ -233,13 +233,34 @@ const GestionDesmontajes = () => {
 };
 
 // 🎨 Estilos
+const fondo = {
+  padding: '2rem',
+  backgroundColor: '#f4f6f9',
+  minHeight: '100vh',
+};
+
+const card = {
+  backgroundColor: '#ffffff',
+  padding: '2rem',
+  borderRadius: '10px',
+  maxWidth: '100%',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+};
+
+const inputFiltro = {
+  padding: '0.5rem',
+  borderRadius: '6px',
+  border: '1px solid #ccc',
+};
+
 const botonAccion = {
-  backgroundColor: '#0070c0',
-  color: 'white',
+  backgroundColor: '#0095DB',
+  color: '#fff',
   padding: '0.5rem 1rem',
   border: 'none',
-  borderRadius: '5px',
+  borderRadius: '6px',
   cursor: 'pointer',
+  fontWeight: 'bold'
 };
 
 const tablaEstilo = {
@@ -251,7 +272,7 @@ const tablaEstilo = {
 };
 
 const theadEstilo = {
-  backgroundColor: '#00274d',
+  backgroundColor: '#003865',
   color: '#fff',
 };
 
@@ -274,16 +295,16 @@ const modalContenido = {
 
 const botonDescargar = {
   marginTop: '1rem',
-  backgroundColor: '#28a745',
-  color: 'white',
+  backgroundColor: '#0095DB',
+  color: '#fff',
   border: 'none',
   padding: '0.5rem 1rem',
   borderRadius: '6px',
   cursor: 'pointer',
 };
 
-export default GestionDesmontajes;
 
+export default GestionDesmontajes;
 
 
 

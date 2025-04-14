@@ -25,7 +25,7 @@ const SolicitarRecuperacion = () => {
   return (
     <div style={fondo}>
       <div style={card}>
-        <img src="/logo-cnt.jpg" alt="Logo CNT" style={logo} />
+        <img src="/logo-cnt.png" alt="Logo CNT" style={logo} />
         <h2 style={{ color: '#00274d' }}>🔐 Recuperar Contraseña</h2>
         <p style={{ marginBottom: '1rem' }}>
           Ingresa tu correo institucional para enviarte un enlace de recuperación.
@@ -69,7 +69,7 @@ const SolicitarRecuperacion = () => {
 // 🎨 Estilos
 const fondo = {
   minHeight: '100vh',
-  backgroundImage: 'url("/fondo-cnt.jpg")',
+  backgroundImage: 'url("/fondo-cnt2025.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   display: 'flex',
@@ -105,7 +105,7 @@ const input = {
 const boton = {
   width: '100%',
   padding: '0.9rem',
-  backgroundColor: '#0070c0',
+  backgroundColor: '#0095DB',
   color: '#fff',
   border: 'none',
   borderRadius: '6px',

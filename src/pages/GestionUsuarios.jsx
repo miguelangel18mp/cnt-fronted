@@ -63,127 +63,149 @@ const GestionUsuarios = () => {
   return (
     <>
       <Navbar />
-      <div style={{ padding: '2rem' }}>
-        <h2 style={{ textAlign: 'center', color: '#00274d' }}>👥 Gestión de Usuarios</h2>
+      <div style={fondo}>
+        <h2 style={{ textAlign: 'center', color: '#003865' }}>👥 Gestión de Usuarios</h2>
 
         {mensaje && (
           <p style={{
             textAlign: 'center',
-            color: mensaje.includes('✅') ? 'green' : 'red',
-            fontWeight: 'bold'
+            color: mensaje.includes('✅') ? '#155724' : '#721c24',
+            backgroundColor: mensaje.includes('✅') ? '#d4edda' : '#f8d7da',
+            padding: '0.8rem',
+            margin: '1rem auto',
+            borderRadius: '6px',
+            fontWeight: 'bold',
+            maxWidth: '600px'
           }}>
             {mensaje}
           </p>
         )}
 
-        <table style={{
-          width: '100%',
-          borderCollapse: 'collapse',
-          marginTop: '1rem',
-          backgroundColor: '#f0f8ff',
-          borderRadius: '6px',
-          overflow: 'hidden'
-        }}>
-          <thead style={{ backgroundColor: '#435267', color: 'white' }}>
-            <tr>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Rol</th>
-              <th>Nueva Contraseña</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {usuarios.map((u) => (
-              <tr key={u.id} style={{ textAlign: 'center' }}>
-                <td>
-                  {editando === u.id ? (
-                    <input value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} />
-                  ) : u.nombre}
-                </td>
-                <td>
-                  {editando === u.id ? (
-                    <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                  ) : u.email}
-                </td>
-                <td>
-                  {editando === u.id ? (
-                    <select value={form.rol} onChange={(e) => setForm({ ...form, rol: e.target.value })}>
-                      <option value="tecnico">Técnico</option>
-                      <option value="bodeguero">Bodeguero</option>
-                      <option value="administrador">Administrador</option>
-                    </select>
-                  ) : u.rol}
-                </td>
-                <td>
-                  {editando === u.id ? (
-                    <input
-                      type="password"
-                      placeholder="Nueva contraseña"
-                      value={form.contraseña}
-                      onChange={(e) => setForm({ ...form, contraseña: e.target.value })}
-                    />
-                  ) : '••••••••'}
-                </td>
-                <td>
-                  {editando === u.id ? (
-                    <>
-                      <button onClick={guardarCambios} style={botonVerde}>💾</button>
-                      <button onClick={() => setEditando(null)} style={botonGris}>❌</button>
-                    </>
-                  ) : (
-                    <>
-                      <button onClick={() => iniciarEdicion(u)} style={botonAmarillo}>✏️</button>
-                      <button onClick={() => eliminarUsuario(u.id)} style={botonRojo}>🗑️</button>
-                    </>
-                  )}
-                </td>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={tablaEstilo}>
+            <thead style={theadEstilo}>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Nueva Contraseña</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {usuarios.map((u) => (
+                <tr key={u.id} style={{ textAlign: 'center' }}>
+                  <td>
+                    {editando === u.id ? (
+                      <input value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} />
+                    ) : u.nombre}
+                  </td>
+                  <td>
+                    {editando === u.id ? (
+                      <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                    ) : u.email}
+                  </td>
+                  <td>
+                    {editando === u.id ? (
+                      <select value={form.rol} onChange={(e) => setForm({ ...form, rol: e.target.value })}>
+                        <option value="tecnico">Técnico</option>
+                        <option value="bodeguero">Bodeguero</option>
+                        <option value="administrador">Administrador</option>
+                      </select>
+                    ) : u.rol}
+                  </td>
+                  <td>
+                    {editando === u.id ? (
+                      <input
+                        type="password"
+                        placeholder="Nueva contraseña"
+                        value={form.contraseña}
+                        onChange={(e) => setForm({ ...form, contraseña: e.target.value })}
+                      />
+                    ) : '••••••••'}
+                  </td>
+                  <td>
+                    {editando === u.id ? (
+                      <>
+                        <button onClick={guardarCambios} style={botonVerde}>💾</button>
+                        <button onClick={() => setEditando(null)} style={botonGris}>❌</button>
+                      </>
+                    ) : (
+                      <>
+                        <button onClick={() => iniciarEdicion(u)} style={botonAmarillo}>✏️</button>
+                        <button onClick={() => eliminarUsuario(u.id)} style={botonRojo}>🗑️</button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );
 };
 
-// Estilos de botones
+// 🎨 Estilos aplicados institucionalmente
+const fondo = {
+  padding: '2rem',
+  backgroundColor: '#f4f6f9',
+  minHeight: '100vh',
+};
+
+const tablaEstilo = {
+  width: '100%',
+  borderCollapse: 'collapse',
+  marginTop: '1rem',
+  backgroundColor: '#ffffff',
+  borderRadius: '8px',
+  boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+};
+
+const theadEstilo = {
+  backgroundColor: '#003865',
+  color: '#ffffff',
+  textAlign: 'center',
+};
+
+// Botones
 const botonVerde = {
-  backgroundColor: '#28a745',
-  color: 'white',
+  backgroundColor: '#0095DB',
+  color: '#fff',
   padding: '0.4rem 0.6rem',
   border: 'none',
   borderRadius: '5px',
   cursor: 'pointer',
-  marginRight: '0.3rem'
+  marginRight: '0.3rem',
 };
 
 const botonGris = {
-  backgroundColor: '#6c757d',
-  color: 'white',
-  padding: '0.4rem 0.6rem',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer'
-};
-
-const botonAmarillo = {
-  backgroundColor: '#ffc107',
-  color: 'black',
+  backgroundColor: '#046693',
+  color: '#fff',
   padding: '0.4rem 0.6rem',
   border: 'none',
   borderRadius: '5px',
   cursor: 'pointer',
-  marginRight: '0.3rem'
 };
 
-const botonRojo = {
-  backgroundColor: '#dc3545',
-  color: 'white',
+const botonAmarillo = {
+  backgroundColor: '#0095DB',
+  color: '#fff',
   padding: '0.4rem 0.6rem',
   border: 'none',
   borderRadius: '5px',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  marginRight: '0.3rem',
+};
+
+const botonRojo = {
+  backgroundColor: '#0095DB',
+  color: '#fff',
+  padding: '0.4rem 0.6rem',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer',
 };
 
 export default GestionUsuarios;

@@ -37,15 +37,13 @@ const Login = () => {
   return (
     <div style={fondoLogin}>
       <div style={contenedorFormulario}>
-        {/* Logo CNT */}
         <img
-          src="/logo-cnt.jpg"
+          src="/logo-cnt.png"
           alt="Logo CNT"
           style={{ width: '120px', marginBottom: '1rem' }}
         />
 
-        {/* Título institucional */}
-        <h1 style={{ fontSize: '1.5rem', color: '#00274d', marginBottom: '1rem' }}>
+        <h1 style={{ fontSize: '1.5rem', color: '#003865', marginBottom: '1rem' }}>
           🧵 Sistema de Registro de Cables Desmontados
         </h1>
 
@@ -78,7 +76,7 @@ const Login = () => {
         )}
 
         <p style={{ marginTop: '1.5rem' }}>
-          <Link to="/solicitar-recuperacion" style={{ color: '#0070c0', textDecoration: 'none' }}>
+          <Link to="/solicitar-recuperacion" style={{ color: '#0095DB', textDecoration: 'none' }}>
             ¿Olvidaste tu contraseña?
           </Link>
         </p>
@@ -90,7 +88,7 @@ const Login = () => {
 // 🎨 Estilos
 const fondoLogin = {
   minHeight: '100vh',
-  backgroundImage: 'url("/fondo-cnt.jpg")',
+  backgroundImage: 'url("/fondo-cnt2025.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   display: 'flex',
@@ -100,7 +98,7 @@ const fondoLogin = {
 };
 
 const contenedorFormulario = {
-  maxWidth: '400px',
+  maxWidth: '420px',
   width: '100%',
   backgroundColor: 'rgba(255, 255, 255, 0.95)',
   padding: '2rem',
@@ -121,7 +119,7 @@ const inputStyle = {
 const botonStyle = {
   width: '100%',
   padding: '10px',
-  backgroundColor: '#0070c0',
+  backgroundColor: '#0095DB', // Azul institucional CNT
   color: 'white',
   border: 'none',
   borderRadius: '5px',

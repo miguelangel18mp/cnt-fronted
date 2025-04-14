@@ -52,7 +52,6 @@ const IngresarCable = () => {
     );
   }, []);
 
-  // ✅ Auto-asignar capacidad desde el tipo
   useEffect(() => {
     const tipo = formulario.tipo.toUpperCase();
     let capacidadDetectada = '';
@@ -126,8 +125,8 @@ const IngresarCable = () => {
           <input type="text" name="latitud" placeholder="Latitud" value={formulario.latitud} onChange={handleChange} required style={input} />
           <input type="text" name="longitud" placeholder="Longitud" value={formulario.longitud} onChange={handleChange} required style={input} />
 
-          <button type="submit" style={boton}>Guardar Cable</button>
-          <button type="button" onClick={() => navigate('/dashboard')} style={{ ...boton, backgroundColor: '#6c757d', marginTop: '0.8rem' }}>
+          <button type="submit" style={botonPrincipal}>Guardar Cable</button>
+          <button type="button" onClick={() => navigate('/dashboard')} style={botonSecundario}>
             ⬅️ Atrás
           </button>
         </form>
@@ -163,12 +162,10 @@ const IngresarCable = () => {
   );
 };
 
-// 🎨 Estilos
+// 🎨 Estilos institucionales
 const fondo = {
   minHeight: '100vh',
-  backgroundImage: 'url("/fondo-cnt.jpg")',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
+  backgroundColor: '#f4f6f9',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -179,7 +176,7 @@ const fondo = {
 const formularioCard = {
   maxWidth: '500px',
   width: '100%',
-  backgroundColor: 'rgba(255,255,255,0.95)',
+  backgroundColor: '#ffffff',
   padding: '2rem',
   borderRadius: '10px',
   boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
@@ -194,10 +191,10 @@ const input = {
   fontSize: '1rem',
 };
 
-const boton = {
+const botonPrincipal = {
   width: '100%',
   padding: '0.8rem',
-  backgroundColor: '#0070c0',
+  backgroundColor: '#0095DB',
   color: '#fff',
   fontWeight: 'bold',
   border: 'none',
@@ -206,7 +203,21 @@ const boton = {
   cursor: 'pointer',
 };
 
+const botonSecundario = {
+  width: '100%',
+  padding: '0.8rem',
+  backgroundColor: '#046693',
+  color: '#fff',
+  fontWeight: 'bold',
+  border: 'none',
+  borderRadius: '6px',
+  fontSize: '1rem',
+  cursor: 'pointer',
+  marginTop: '0.8rem',
+};
+
 export default IngresarCable;
+
 
 
 

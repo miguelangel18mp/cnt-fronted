@@ -143,12 +143,10 @@ const FinalizarDesmontaje = () => {
   );
 };
 
-// 🎨 Estilos
+// 🎨 Estilos CNT
 const fondo = {
   minHeight: '100vh',
-  backgroundImage: 'url("/fondo-cnt.jpg")',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
+  backgroundColor: '#f4f6f9', // Fondo institucional claro
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -159,7 +157,7 @@ const fondo = {
 const formularioCard = {
   maxWidth: '520px',
   width: '100%',
-  backgroundColor: 'rgba(255,255,255,0.95)',
+  backgroundColor: '#ffffff',
   padding: '2rem',
   borderRadius: '10px',
   boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
@@ -176,22 +174,22 @@ const input = {
 
 const botonPrincipal = {
   width: '100%',
-  padding: '0.8rem',
-  backgroundColor: '#0070c0',
+  padding: '0.85rem',
+  backgroundColor: '#0095DB', // Azul CNT
   color: '#fff',
   fontWeight: 'bold',
   border: 'none',
   borderRadius: '6px',
   fontSize: '1rem',
   cursor: 'pointer',
-  marginBottom: '0.8rem'
+  marginBottom: '0.9rem'
 };
 
 const botonSecundario = {
   width: '100%',
-  padding: '0.7rem',
-  backgroundColor: '#ccc',
-  color: '#333',
+  padding: '0.8rem',
+  backgroundColor: '#046693', // Pantone 307
+  color: '#fff',
   fontWeight: 'bold',
   border: 'none',
   borderRadius: '6px',

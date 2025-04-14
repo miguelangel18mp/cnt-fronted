@@ -40,11 +40,10 @@ const RegistrarUsuario = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#00274d', color: '#fff' }}>
+    <div style={fondo}>
       <Navbar />
-
       <div style={contenedorFormulario}>
-        <h2 style={{ textAlign: 'center', color: '#00274d', marginBottom: '1.5rem' }}>
+        <h2 style={{ textAlign: 'center', color: '#003865', marginBottom: '1.5rem' }}>
           🧑‍💼 Registrar Nuevo Usuario
         </h2>
 
@@ -112,20 +111,26 @@ const RegistrarUsuario = () => {
   );
 };
 
-// 🎨 Estilos
+// 🎨 Estilos institucionales
+const fondo = {
+  minHeight: '100vh',
+  backgroundColor: '#f4f6f9',
+  padding: '2rem',
+};
+
 const contenedorFormulario = {
   maxWidth: '600px',
-  margin: '2rem auto',
+  margin: '0 auto',
   padding: '2rem',
   backgroundColor: '#ffffff',
   borderRadius: '10px',
   color: '#333',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
 };
 
 const inputStyle = {
   width: '100%',
-  padding: '0.7rem',
+  padding: '0.75rem',
   marginBottom: '1rem',
   borderRadius: '5px',
   border: '1px solid #ccc',
@@ -135,7 +140,7 @@ const inputStyle = {
 const botonStyle = {
   width: '100%',
   padding: '0.8rem',
-  backgroundColor: '#0070c0',
+  backgroundColor: '#0095DB', // Azul CNT
   color: 'white',
   border: 'none',
   borderRadius: '6px',
