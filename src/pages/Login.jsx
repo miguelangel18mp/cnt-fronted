@@ -38,7 +38,7 @@ const Login = () => {
     <div style={fondoLogin}>
       <div style={contenedorFormulario}>
         <img
-          src="/logo-cnt.png"
+          src="/logo-cnt20254s.png"
           alt="Logo CNT"
           style={{ width: '120px', marginBottom: '1rem' }}
         />
